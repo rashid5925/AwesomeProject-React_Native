@@ -1,59 +1,54 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-native';
-//import { TouchableOpacity } from 'react-native-web';
+import { StyleSheet, View, Text } from 'react-native';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import * as React from 'react';
+import {UselessTextInput, Add_task} from './code/mainscreen';
+
 
 function onClickButton() {
-  alert("Hello")
+  navigation.navigate("Details")
 }
+
+function HomeScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <UselessTextInput/>
+      <Add_task onPress={() => {
+        navigation.navigate('Details')
+      }} title="Add Task" />
+    </View>
+  );
+}
+
+function SecondScreen() {
+  return (
+    <View>
+      <Text>Hello World!!!</Text>
+    </View>
+  )
+}
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   
   return (
-    <View style={styles.container}>
-      <Text>Hello World!</Text>
-      <Image source={require("./assets/icon.png")} style={styles.img}></Image>
-      <Button onPress={() => {
-        onClickButton()
-      }}
-        title="Press me" color="deepskyblue"/>
-      <TouchableOpacity onPress={() => {
-        onClickButton()
-      }} style={styles.touch}>
-        <View style={styles.but}>
-          <Text style={styles.butText}>Opacity</Text>
-        </View>
-      </TouchableOpacity>
-      
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Details" component={SecondScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#020617',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  img: {
-    height: 100,
-    width: 100,
-  },
-  touch: {
-    paddingTop:20,
-  },
-  but: {
-    height: 60,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 200,
-    backgroundColor: "#5eba7d",
-    borderRadius: 10,
-  },
-  butText: {
-    fontSize: 30,
-    fontFamily: "serif",
-    fontWeight: "bold",
-  }
 });
