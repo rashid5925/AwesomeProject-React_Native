@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -7,70 +7,91 @@ import {
   Text,
   FlatList,
   View,
+  Pressable,
+  Alert,
 } from "react-native";
 
 var input = "";
 
-
 const UselessTextInput = () => {
-	const [text, onChangeText] = React.useState("");
-	input = text;
-	return (
-		<SafeAreaView>
-		<TextInput
-			style={styles.input}
-			onChangeText={onChangeText}
-			value={text}
-			placeholder="Enter Task"
-			keyboardType="ascii-capable"
-		/>
-		</SafeAreaView>
-	);
+  const [text, onChangeText] = React.useState("");
+  input = text;
+  return (
+    <SafeAreaView>
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangeText}
+        value={text}
+        placeholder="Enter Task"
+        keyboardType="ascii-capable"
+      />
+    </SafeAreaView>
+  );
 };
 
 const Add_task = ({ onPress, title }) => {
-	const [tasks, setdata] = useState([]);
+  const [tasks, setdata] = useState([]);
 
-	function addData() {
-		setdata([...tasks, input]);
-	}
-	
+  function addData() {
+    setdata([...tasks, input]);
+  }
 
-	return (
-		<View style={styles.marginBottom=80}>
-			<TouchableOpacity
-			onPress={() => {
-				addData();
-			}}
-			style={styles.appButtonContainer}
-			>
-			<Text style={styles.appButtonText}>{title}</Text>
-			</TouchableOpacity>
-			<FlatList contentContainerStyle={{ paddingBottom: 120 }}
-			 data={tasks} renderItem={(itemD) => {
-				return (
-					<View>
-					<Text style={styles.listStyle}>
-						{itemD.item}
-					</Text>
-					</View>
-				)
-			}} alwaysBounceHorizontal={false}/>
-		</View>
-	);
+  return (
+    <View style={(styles.marginBottom = 80)}>
+      <TouchableOpacity
+        onPress={() => {
+          addData();
+        }}
+        style={styles.appButtonContainer}
+      >
+        <Text style={styles.appButtonText}>{title}</Text>
+      </TouchableOpacity>
+      <FlatList
+        contentContainerStyle={{ paddingBottom: 120 }}
+        data={tasks}
+        renderItem={(itemD) => {
+          return (
+            <Pressable
+              onPress={() => {
+                const createTwoButtonAlert = () =>
+				
+                  Alert.alert("Confirmation", "Are you sure to delete this Task?", [
+                    {
+                      text: "No",
+                      style: "cancel",
+                    },
+                    { text: "OK", onPress: () => setdata((tasks) => {
+						return tasks.filter(function (value) {
+							return itemD.item !== value;
+						});
+						})},
+                  ]);
+
+				createTwoButtonAlert()
+              }}
+            >
+              <View>
+                <Text style={styles.listStyle}>{itemD.item}</Text>
+              </View>
+            </Pressable>
+          );
+        }}
+        alwaysBounceHorizontal={false}
+      />
+    </View>
+  );
 };
 
 const RenderItem = ({ item }) => {
-  	return <Text style={styles.listStyle}>{item}</Text>;
+  return <Text style={styles.listStyle}>{item}</Text>;
 };
-
 
 const styles = StyleSheet.create({
   input: {
     height: 60,
     width: 350,
     margin: 12,
-	marginTop: 150,
+    marginTop: 150,
     borderWidth: 0,
     backgroundColor: "#d6d6d6",
     padding: 10,
