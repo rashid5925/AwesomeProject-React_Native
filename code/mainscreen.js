@@ -71,7 +71,9 @@ const styles = StyleSheet.create({
 
 const Add_task = ({ onPress, title }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.appButtonContainer}>
+    <TouchableOpacity onPress={() => {
+        alert("Hello")
+    }} style={styles.appButtonContainer}>
       <Text style={styles.appButtonText}>{title}</Text>
     </TouchableOpacity>
   );

@@ -7,28 +7,28 @@ import * as React from 'react';
 import {UselessTextInput, Add_task} from './code/mainscreen';
 
 
-function onClickButton() {
-  navigation.navigate("Details")
-}
+
 
 function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <UselessTextInput/>
-      <Add_task onPress={() => {
-        navigation.navigate('Details')
-      }} title="Add Task" />
+      <Add_task 
+        //onPress={() => {
+        //navigation.navigate('Details')
+        //}}
+       title="Add Task" />
     </View>
   );
 }
 
-function SecondScreen() {
-  return (
-    <View>
-      <Text>Hello World!!!</Text>
-    </View>
-  )
-}
+// function SecondScreen() {
+//   return (
+//     <View>
+//       <Text>Hello World!!!</Text>
+//     </View>
+//   )
+// }
 
 const Stack = createNativeStackNavigator();
 
@@ -37,8 +37,20 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={SecondScreen} />
+        <Stack.Screen name="Home" 
+        options={{
+          title: 'To Do List',
+          headerStyle: {
+            backgroundColor: '#1c96c5',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          
+        }}
+        component={HomeScreen} />
+        {/* <Stack.Screen name="Details" component={SecondScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
