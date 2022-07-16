@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/bin/yarnpkg add expo-sqlite@~10.2.0
+  /usr/bin/node /usr/bin/yarnpkg add expo-updates@~0.13.3
 
 PATH: 
   /home/rashid/.config/composer/vendor/bin:/home/rashid/.local/bin:/home/rashid/.config/composer/vendor/bin:/home/rashid/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/rashid/sdks/flutter/bin:/home/rashid/sdks/flutter/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/home/rashid/Public/react_native/AwesomeProject/node_modules/.yarn-integrity'
+  Error: EACCES: permission denied, mkdir '/home/rashid/Public/react_native/AwesomeProject/node_modules/@babel/core/node_modules/@babel'
 
 npm manifest: 
   {
